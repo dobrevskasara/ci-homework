@@ -1,0 +1,107 @@
+PS C:\Users\sarad\Desktop\fold> @"
+>> version: '3.8'
+>> 
+>> services:
+>>   jenkins-blueocean:
+>>     image: jenkinsci/blueocean:latest
+>>     container_name: jenkins-blueocean
+>>     ports:
+>>       - "8080:8080"
+>>       - "50000:50000"
+>>     volumes:
+>>       - jenkins_home:/var/jenkins_home
+>> 
+>>   docker:
+>>     image: docker:dind
+>>     container_name: docker
+>>     privileged: true
+>>     ports:
+>>       - "2375:2375"
+>>       - "2376:2376"
+>> 
+>> volumes:
+>>   jenkins_home:
+>> "@ | Out-File -FilePath "docker-compose.yml" -Encoding UTF8
+PS C:\Users\sarad\Desktop\fold> dir docker-compose.yml
+
+
+    Directory: C:\Users\sarad\Desktop\fold
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         3/25/2026  11:30 PM            391 docker-compose.yml
+
+
+PS C:\Users\sarad\Desktop\fold> docker compose up -d
+time="2026-03-25T23:31:12+01:00" level=warning msg="C:\\Users\\sarad\\Desktop\\fold\\docker-compose.yml: `version` is obsolete"
+[+] Running 32/18
+ ✔ docker Pulled                                                           187.9s 
+ ✔ jenkins-blueocean Pulled                                                526.3s 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[+] Running 4/4
+ ✔ Network fold_default         Created                                      0.2s 
+ ✔ Volume "fold_jenkins_home"   Created                                      0.0s 
+ ✔ Container docker             Started                                     10.1s 
+ ✔ Container jenkins-blueocean  Started                                     10.1s 
+PS C:\Users\sarad\Desktop\fold> docker compose ps
+>>
+time="2026-03-25T23:40:17+01:00" level=warning msg="C:\\Users\\sarad\\Desktop\\fold\\docker-compose.yml: `version` is obsolete"
+NAME                IMAGE                        COMMAND                  SERVICE             CREATED          STATUS         PORTS
+docker              docker:dind                  "dockerd-entrypoint.…"   docker              18 seconds ago   Up 8 seconds   0.0.0.0:2375-2376->2375-2376/tcp      
+jenkins-blueocean   jenkinsci/blueocean:latest   "/sbin/tini -- /usr/…"   jenkins-blueocean   19 seconds ago   Up 8 seconds   0.0.0.0:8080->8080/tcp, 0.0.0.0:50000->50000/tcp
+PS C:\Users\sarad\Desktop\fold> docker compose logs jenkins-blueocean
+time="2026-03-25T23:40:29+01:00" level=warning msg="C:\\Users\\sarad\\Desktop\\fold\\docker-compose.yml: `version` is obsolete"
+jenkins-blueocean  | Running from: /usr/share/jenkins/jenkins.war
+jenkins-blueocean  | webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
+jenkins-blueocean  | 2026-03-25 22:40:12.339+0000 [id=1]        INFO    org.eclipse.jetty.util.log.Log#initialized: Logging initialized @1308ms to org.eclipse.jetty.util.log.JavaUtilLog
+jenkins-blueocean  | 2026-03-25 22:40:12.519+0000 [id=1]        INFO    winstone.Logger#logInternal: Beginning extraction from war file
+jenkins-blueocean  | 2026-03-25 22:40:13.880+0000 [id=1]        WARNING o.e.j.s.handler.ContextHandler#setContextPath: Empty contextPath
+jenkins-blueocean  | 2026-03-25 22:40:13.969+0000 [id=1]        INFO    org.eclipse.jetty.server.Server#doStart: jetty-9.4.45.v20220203; built: 2022-02-03T09:14:34.105Z; git: 4a0c91c0be53805e3fcffdcdcc9587d5301863db; jvm 11.0.16.1+1
+jenkins-blueocean  | 2026-03-25 22:40:14.305+0000 [id=1]        INFO    o.e.j.w.StandardDescriptorProcessor#visitServlet: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+jenkins-blueocean  | 2026-03-25 22:40:14.356+0000 [id=1]        INFO    o.e.j.s.s.DefaultSessionIdManager#doStart: DefaultSessionIdManager workerName=node0
+jenkins-blueocean  | 2026-03-25 22:40:14.356+0000 [id=1]        INFO    o.e.j.s.s.DefaultSessionIdManager#doStart: No SessionScavenger set, using defaults
+jenkins-blueocean  | 2026-03-25 22:40:14.357+0000 [id=1]        INFO    o.e.j.server.session.HouseKeeper#startScavenging: node0 Scavenging every 600000ms
+jenkins-blueocean  | 2026-03-25 22:40:15.103+0000 [id=1]        INFO    hudson.WebAppMain#contextInitialized: Jenkins home directory: /var/jenkins_home found at: EnvVars.masterEnvVars.get("JENKINS_HOME")
+jenkins-blueocean  | 2026-03-25 22:40:15.555+0000 [id=1]        INFO    o.e.j.s.handler.ContextHandler#doStart: Started w.@73a19967{Jenkins v2.346.3,/,file:///var/jenkins_home/war/,AVAILABLE}{/var/jenkins_home/war}
+jenkins-blueocean  | 2026-03-25 22:40:15.631+0000 [id=1]        INFO    o.e.j.server.AbstractConnector#doStart: Started ServerConnector@39a8312f{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+jenkins-blueocean  | 2026-03-25 22:40:15.633+0000 [id=1]        INFO    org.eclipse.jetty.server.Server#doStart: Started @4606ms
+jenkins-blueocean  | 2026-03-25 22:40:15.635+0000 [id=25]       INFO    winstone.Logger#logInternal: Winstone Servlet Engine running: controlPort=disabled
+jenkins-blueocean  | 2026-03-25 22:40:16.092+0000 [id=32]       INFO    jenkins.InitReactorRunner$1#onAttained: Started initialization
+jenkins-blueocean  | 2026-03-25 22:40:16.319+0000 [id=49]       INFO    hudson.PluginManager#considerDetachedPlugin: Loading a detached plugin as a dependency: /var/jenkins_home/plugins/sshd.jpi
+jenkins-blueocean  | 2026-03-25 22:40:16.388+0000 [id=49]       INFO    hudson.PluginManager#considerDetachedPlugin: Loading a detached plugin as a dependency: /var/jenkins_home/plugins/javax-mail-api.jpi
+jenkins-blueocean  | 2026-03-25 22:40:17.431+0000 [id=32]       INFO    hudson.PluginManager#considerDetachedPlugin: Loading a detached plugin as a dependency: /var/jenkins_home/plugins/bouncycastle-api.jpi
+jenkins-blueocean  | 2026-03-25 22:40:17.517+0000 [id=32]       INFO    hudson.PluginManager#considerDetachedPlugin: Loading a detached plugin as a dependency: /var/jenkins_home/plugins/command-launcher.jpi
+jenkins-blueocean  | 2026-03-25 22:40:17.533+0000 [id=32]       INFO    hudson.PluginManager#considerDetachedPlugin: Loading a detached plugin as a dependency: /var/jenkins_home/plugins/jdk-tool.jpi
+jenkins-blueocean  | 2026-03-25 22:40:18.832+0000 [id=34]       INFO    jenkins.InitReactorRunner$1#onAttained: Listed all plugins
+PS C:\Users\sarad\Desktop\fold> docker exec -it jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
+9c9a0a69b8e94061bff4afbbf2aecc8b
+
+What's next?
+  Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug jenkins-blueocean
+  Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\sarad\Desktop\fold> 
+
+4. Jenkins URL configured during setup:
+http://localhost:8080
+
+PS C:\Users\sarad\Desktop\fold> docker compose ps
+time="2026-03-25T23:54:55+01:00" level=warning msg="C:\\Users\\sarad\\Desktop\\fold\\docker-compose.yml: `version` is obsolete"
+NAME      IMAGE         COMMAND                  SERVICE   CREATED          STATUS          PORTS
+docker    docker:dind   "dockerd-entrypoint.…"   docker    14 minutes ago   Up 14 minutes   0.0.0.0:2375-2376->2375-2376/tcp
+PS C:\Users\sarad\Desktop\fold> 

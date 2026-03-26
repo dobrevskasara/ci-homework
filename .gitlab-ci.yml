@@ -1,0 +1,14 @@
+stages:
+  - build
+
+build_docker_image:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/my-project/my-image:latest .
+    - docker push $CI_REGISTRY/my-project/my-image:latest

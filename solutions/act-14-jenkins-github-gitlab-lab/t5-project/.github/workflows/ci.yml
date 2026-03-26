@@ -1,0 +1,11 @@
+name: CI-Workflow-T5
+on: [push]
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Verify Dockerfile Presence
+        run: ls -l Dockerfile

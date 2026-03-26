@@ -1,0 +1,35 @@
+1. PROJECT CREATION & SCM
+- Project Name: KIII-Lab-01
+- Repository: https://github.com/dobrevskasara/KIII-Lab-01.git
+- Branch: */main
+
+2. GITHUB CREDENTIALS CONFIGURATION 
+- Credential ID: github-creds
+- Credential Type: Username with password (GitHub PAT)
+- Description: Sara's GitHub Access Token
+
+3. BUILD TRIGGER CONFIGURATION
+- Trigger: Build periodically
+- Schedule: * * * * *
+
+4. BUILD STEP
+- Command: ls -l
+
+5. CONSOLE OUTPUT (Build with Credentials)
+Started by user Sara Dobrevska
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/KIII-Lab-01
+The recommended git tool is: NONE
+ > git rev-parse --resolve-auth-ssh-uri https://github.com/dobrevskasara/KIII-Lab-01.git # timeout=10
+
+[!] Using credentials: github-creds (Sara's GitHub Access Token)
+
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/dobrevskasara/KIII-Lab-01.git # timeout=10
+...
+[KIII-Lab-01] $ /bin/sh -xe /tmp/jenkins123.sh
++ ls -l
+total 4
+-rw-r--r-- 1 jenkins jenkins 12 Mar 26 00:45 README.md
+
+Finished: SUCCESS

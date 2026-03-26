@@ -1,0 +1,136 @@
+PS C:\Users\sarad\Desktop\fold> mkdir jenkins-homework
+
+
+    Directory: C:\Users\sarad
+    \Desktop\fold
+
+
+Mode            LastWriteTime
+----            -------------
+d-----    3/26/2026   7:36 PM
+
+
+PS C:\Users\sarad\Desktop\fold> cd jenkins-homework
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> "<!DOCTYPE html><html><body><h1>Jenkins Blue Ocean CI/CD Deployment</h1><p>Build Status: Success</p></body></html>" | Out-File -FilePath index.html -Encoding ascii
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> "FROM nginx:alpine`nCOPY index.html /usr/share/nginx/html/index.html" | Out-File -FilePath Dockerfile
+ -Encoding ascii
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> $jenkinsfileContent = @'
+>> pipeline {
+>>     agent any
+>>     environment {
+>>         DOCKER_HUB_USER = 'tvoeto_korisnicko_ime'        
+>>         IMAGE_NAME = 'jenkins-blue-ocean-demo'
+HUB_USER}/${IMAGE_NAME}:${env.BUILD_ID}")
+>>                 }
+>>             }
+>>         }
+>>         stage('Push Image') {
+>>             steps {
+>>                 script {
+>>                     docker.withRegistry('', 'docker-hub-credentials-id') {
+>>                         dockerImage.push()
+>>                         dockerImage.push('latest')
+>>                     }
+>>                 }
+>>             }
+>>         }
+>>     }
+>> }
+>> '@
+>> $jenkinsfileContent | Out-File -FilePath Jenkinsfile -Encoding ascii
+PS C:\Users\sarad\D  ktop\fold\jenkins-homework>
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> ls
+
+
+    Directory: C:\Users\sarad\Desktop\fold\jenkins-homework
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         3/26/2026   7:37 PM             68 Dockerfile
+>>                 script {
+>>                     docker.withRegistry('', 'docker-hub-credentials-id') {
+>>                         dockerImage.push()
+>>                         dockerImage.push('latest')
+>>                     }
+>>                 }
+>>             }
+>>         }
+>>     }
+>> }
+>> '@
+>> $jenkinsfileContent | Out-File -FilePath Jenkinsfile -Encoding ascii
+PS C:\Users\sarad\D  ktop\fold\jenkins-homework>
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> ls
+
+
+    Directory: C:\Users\sarad\Desktop\fold\jenkins-homework
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         3/26/2026   7:37 PM             68 Dockerfile
+>>             }
+>>         }
+>>     }
+>> }
+>> '@
+>> $jenkinsfileContent | Out-File -FilePath Jenkinsfile -Encoding ascii
+PS C:\Users\sarad\D  ktop\fold\jenkins-homework>
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> ls
+
+
+    Directory: C:\Users\sarad\Desktop\fold\jenkins-homework
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         3/26/2026   7:37 PM             68 Dockerfile
+
+
+    Directory: C:\Users\sarad\Desktop\fold\jenkins-homework
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         3/26/2026   7:37 PM             68 Dockerfile
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         3/26/2026   7:37 PM             68 Dockerfile
+----                 -------------         ------ ----
+-a----         3/26/2026   7:37 PM             68 Dockerfile
+-a----         3/26/2026   7:37 PM             68 Dockerfile
+-a----         3/26/2026   7:36 PM            115 index.html
+-a----         3/26/2026   7:37 PM            774 Jenkinsfile
+
+
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> git init
+Initialized empty Git repository in C:/Users/sarad/Desktop/fold/jenkins-homework/.git/
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> git add .
+warning: in the working copy of 'Dockerfile', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Jenkinsfile', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> git commit -m "Initial commit for Task 1: Jenkins Pipeline"
+[master (root-commit) 20bcb57] Initial commit for Task 1: Jenkins Pipeline
+ 3 files changed, 32 insertions(+)
+ create mode 100644 Dockerfile
+ create mode 100644 Jenkinsfile
+ create mode 100644 index.html
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> git branch -M main
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> # Замени го овој линк со твојот реален линк од GitHub
+>> git remote add origin https://github.com/dobrevskasara/jenkins-homework.git
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> git push -u origin main
+remote: Repository not found.
+fatal: repository 'https://github.com/dobrevskasara/jenkins-homework.git/' not found
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> git remote add origin https://github.com/dobrevskasara/jenkins-homework.git
+error: remote origin already exists.
+PS C:\Users\sarad\Desktop\fold\jenkins-homework> git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 798 bytes | 266.00 KiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/dobrevskasara/jenkins-homework.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+PS C:\Users\sarad\Desktop\fold\jenkins-homework>

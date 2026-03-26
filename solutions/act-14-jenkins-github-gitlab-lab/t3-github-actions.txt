@@ -1,0 +1,33 @@
+
+1. WORKFLOW YAML FILE (.github/workflows/main.yml)
+
+name: T3-Workflow
+on: [push]
+
+jobs:
+  lab-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Run Lab Command
+        run: |
+          echo "Executing Task 3..."
+          ls -R
+
+2. GITHUB SECRETS ADDED
+
+- MY_LAB_TOKEN (Verified in Repository Settings)
+
+3. WORKFLOW RUN EVIDENCE (Actions Tab)
+
+- Workflow Name: T3-Workflow
+- Execution ID: #1
+- Status: Success
+- Total Duration: 7s
+- Job Name: lab-job
+- Runner OS: ubuntu-latest
+- Triggered by: push (Commit 85caa6f)
+
+
+Finished: SUCCESS
